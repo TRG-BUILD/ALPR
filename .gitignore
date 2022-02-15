@@ -1,3 +1,9 @@
+# ---------------------------- CUSTOM IGNORES ---------------------------
+
+# Ignore license plates used for testing, due to size contraints
+license_plates/
+
+# ---------------------------- PYTHON IGNORES ----------------------------
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
