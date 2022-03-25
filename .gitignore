@@ -2,6 +2,9 @@
 
 # Ignore license plates used for testing, due to size contraints
 license_plates/
+alprVideos/
+openalpr_64/
+alpr-unconstrained/
 
 # ---------------------------- PYTHON IGNORES ----------------------------
 # Byte-compiled / optimized / DLL files
