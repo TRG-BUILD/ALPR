@@ -1,6 +1,4 @@
 
 
-class Controller:
-    
-    def start():
-        pass
+def controller():
+    pass
