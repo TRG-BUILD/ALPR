@@ -8,8 +8,7 @@ ENV PYTHONUNBUFFERED=1
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
         ffmpeg \
-        openalpr \
-        dos2unix
+        openalpr
 RUN apt-get clean
 
 # Install python dependencies
