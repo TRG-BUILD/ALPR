@@ -3,6 +3,7 @@ FROM python:3.11.0a7-slim-buster
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install system dependencies
 RUN apt-get update
@@ -11,7 +12,8 @@ RUN apt-get install -y --no-install-recommends \
         openalpr \
         openalpr-daemon \
         openalpr-utils \
-        libopenalpr-dev
+        libopenalpr-dev \
+        tesseract-ocr
 RUN apt-get clean
 
 # Install python dependencies
