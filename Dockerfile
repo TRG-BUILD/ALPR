@@ -8,7 +8,10 @@ ENV PYTHONUNBUFFERED=1
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
         ffmpeg \
-        openalpr
+        openalpr \
+        openalpr-daemon \
+        openalpr-utils \
+        libopenalpr-dev
 RUN apt-get clean
 
 # Install python dependencies
@@ -18,4 +21,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-ENTRYPOINT [ "src/controller.py" ]
+CMD [ "python", "src/controller.py" ]
