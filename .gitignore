@@ -1,9 +1,3 @@
-# ---------------------------- CUSTOM IGNORES ---------------------------
-
-# Ignore all videos and files. They are local only
-export_files/*
-input_videos/*
-
 # ---------------------------- PYTHON IGNORES ----------------------------
 # Byte-compiled / optimized / DLL files
 __pycache__/
