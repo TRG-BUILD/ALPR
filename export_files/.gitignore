@@ -1,3 +1,7 @@
+# This file is here only to make sure nothing in this folder can be pushed to github.
+# This is done because this folder might contain sensitive information when it is used.
+# Please read the README.md for wht this folder is used for.
+
 # Ignore everything in this directory
 *
 # Except this file
