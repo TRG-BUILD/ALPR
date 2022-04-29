@@ -1,10 +1,8 @@
 # ---------------------------- CUSTOM IGNORES ---------------------------
 
-# Ignore license plates used for testing, due to size contraints
-license_plates/
-alprVideos/
-openalpr_64/
-alpr-unconstrained/
+# Ignore all videos and files. They are local only
+export_files/*
+input_videos/*
 
 # ---------------------------- PYTHON IGNORES ----------------------------
 # Byte-compiled / optimized / DLL files

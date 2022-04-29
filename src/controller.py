@@ -19,7 +19,8 @@ def controller():
     
     code, mi_model, file_format, seperator = user_input()
     print("\nInput modtaget korrekt. Kører plade genkendelses algoritmen. Vær venligst tålmodig!")
-    print("\nDet vil normalt tage flere gange videoens længde at analysere for algoritmen\n")
+    print("\nDet vil normalt tage mange gange videoens længde at analysere for algoritmen\n")
+    print("\nDette er påvirket af hvor god din computer er, kvaliteten af video og hvordan Docker er sat op")
     
     for video in video_list:
         start_time = time()

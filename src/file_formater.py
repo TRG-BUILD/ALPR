@@ -1,9 +1,9 @@
 
 
 def file_formater(file_path, file_format, seperator, results_list):
-    results_list = reduce_list(results_list)
+    new_list = reduce_list(results_list)
     if file_format == ".csv":
-        write_to_csv(file_path, seperator, results_list)
+        write_to_csv(file_path, seperator, new_list)
     else:
         raise Exception("Fileformat: " + str(file_format) + " not supported in file_formater")
     

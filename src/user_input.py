@@ -3,6 +3,15 @@ import os
 def user_input():
     mi_model = "alpr"
     
+    code = get_code(mi_model)
+    
+    file_format = ".csv"
+    seperator = ";"
+    
+    return code, mi_model, file_format, seperator
+
+def get_code(mi_model):
+    code = ""
     correct_choice = False
     if mi_model == "alpr":
         print("\nOpenalpr understøtter hvilken landekode nummerpladerne ligger indeni.")
@@ -16,7 +25,4 @@ def user_input():
     else:
         raise Exception("Machine learning model: " + str(mi_model) + " ikke understøttet i user_input")
     
-    file_format = ".csv"
-    seperator = ";"
-    
-    return code, mi_model, file_format, seperator
+    return code
