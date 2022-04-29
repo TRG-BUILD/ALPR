@@ -2,21 +2,25 @@ import subprocess
 import json
 from math import floor
 
-def recognizer(code, path, length_of_vid):
+def recognizer(code, mi_model, path, length_of_vid):
     # Make predictions. Presently, only alpr is supported, but can be changed here
     # All 3 functions are coupled to alpr, given it returns each frame as a json (others might not)
     # The first predicts on each frame and returns that as a byte string of these predictions (most have no results)
     # The second converts the bytestring into a list of json objects
     # The third retrieves only those frames with results, and gives a timestamp in the video
-    predictions = find_plates(code, path)
-    list_of_dicts = clean_result(predictions.stdout)
+    list_of_dicts = find_plates(mi_model, code, path)
     return retrieve_results(list_of_dicts,length_of_vid,len(list_of_dicts))
 
+def find_plates(mi_model, code, path):
+    list_of_dicts = []
+    if mi_model == "alpr":
+        predictions = subprocess.run(["alpr","-c",code,path,"-n","1000", "--json"], stdout=subprocess.PIPE)
+        list_of_dicts = _clean_alpr_result(predictions.stdout)
+    else:
+        raise Exception("MI Model " + mi_model + " not supported in the find_plates function")
+    return list_of_dicts
 
-def find_plates(code, path):
-    return subprocess.run(["alpr","-c",code,path,"-n","1000", "--json"], stdout=subprocess.PIPE)
-
-def clean_result(stdout_string):
+def _clean_alpr_result(stdout_string):
     bytes = stdout_string.replace(b"\r",b"")
     bytes = bytes.replace(b"\n",b"")
     string_with_multiple_jsons = bytes.decode('utf-8')
