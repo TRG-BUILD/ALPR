@@ -15,20 +15,23 @@ def controller():
         print("\nVideoer vil blive konverteret til mp4 hvis de ikke er det, hvilket kan reducere kvaliteten.\n")
         return False
     else:
+        print("\nInput modtaget korrekt for videoene:")
+        for video in video_list:
+            print(str(video["name"])) 
         print("\nAlle videoer i korrekt mp4 format. Indtast venligst de konfigurationer du ønsker\n")
     
-    code, mi_model, file_format, seperator = user_input()
-    print("\nInput modtaget korrekt. Kører plade genkendelses algoritmen. Vær venligst tålmodig!")
-    print("\nDet vil normalt tage mange gange videoens længde at analysere for algoritmen\n")
-    print("\nDette er påvirket af hvor god din computer er, kvaliteten af video og hvordan Docker er sat op")
+    code, mi_model, file_format, seperator, minimum_confidence = user_input()
+    print("\nKører plade genkendelses algoritmen for en af gangen. Vær venligst tålmodig!")
+    print("\nDet vil normalt tage mange gange videoens længde at analysere for algoritmen")
+    print("\nDette er påvirket primært af hvor god din computer er og kvaliteten af videoen")
     
     for video in video_list:
         start_time = time()
         print("\nPåbegynder plade genkendelses algoritmen på filen " + video["name"] + "\n")
-        result_list = recognizer(code, mi_model, video["path"], video["time"])
+        result_list = recognizer(code, mi_model, video["path"], video["time"])        
         print("\nAlgoritmen er færdig, gemmer som fil\n")
         file_path = files_dir_path + "/" + video["name"].replace(".mp4",file_format).replace(".MP4", file_format)
-        file_formater(file_path, file_format, seperator, result_list)
+        file_formater(file_path, file_format, seperator, minimum_confidence, result_list)
         end_time = time()
         print("\nFil gemt som " + str(video["name"]).replace(".mp4", file_format) +" i /alpr/export_files/ folderen.\n")
         print("\nDet tog " + str(round(end_time-start_time, 2)) + " sekunder.\n")

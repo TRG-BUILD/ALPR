@@ -7,6 +7,8 @@ def video_loader(videos_dir_path):
     
     video_list = []
     for file_name in file_list:
+        if file_name == ".gitignore":
+            continue
         file_path = videos_dir_path + "/" + file_name
         path, time_in_sec = _video_converter(file_path)
         video_list.append({

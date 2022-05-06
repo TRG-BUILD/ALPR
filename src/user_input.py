@@ -5,10 +5,12 @@ def user_input():
     
     code = get_code(mi_model)
     
+    min_confidence = 60
+    
     file_format = ".csv"
     seperator = ";"
     
-    return code, mi_model, file_format, seperator
+    return code, mi_model, file_format, seperator, min_confidence
 
 def get_code(mi_model):
     code = ""

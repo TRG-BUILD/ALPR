@@ -63,20 +63,107 @@ The program will then analyze each video. Expect roughly double to triple the vi
 
 When done, all videos have been analyzed and created as files in the alpr/export_files/ folder.
 
-## Analysis
-start_time => the specifc start frame, shown in normal video time (ie. 00:01:05 for 65 seconds into the video)
-end_time => the specific frame the plate exits the video.
-plate => the numberplate which have been predicted to be in that time
-confidence => how confident the machine learning algorithm is in the prediction
-
 ## Supported Models and Format
 Here is a list and description of what machine learning models and formats are used.
 
 ### Supported ALPR algorithms
-Presently, only openalpr is a supported machine learning model. Will be expanded upon.
+Presently, only openalpr is a supported machine learning model.
+
+When openalpr is run on a video file, it gives information following this structure:
+```json
+{
+    "version": 2,
+    "data_type": "alpr_results",
+    "epoch_time": 1651662133289,
+    "img_width": 640,
+    "img_height": 480,
+    "processing_time_ms": 68.646896,
+    "regions_of_interest": [],
+    "results": [
+        {
+            "plate": "GJJNE",
+            "confidence": 79.056992,
+            "matches_template": 0,
+            "plate_index": 0,
+            "region": "",
+            "region_confidence": 0,
+            "processing_time_ms": 9.1742,
+            "requested_topn": 1000,
+            "coordinates": [
+                {
+                    "x": 337,
+                    "y": 221
+                },
+                {
+                    "x": 412,
+                    "y": 210
+                },
+                {
+                    "x": 416,
+                    "y": 225
+                },
+                {
+                    "x": 340,
+                    "y": 237
+                }
+            ],
+            "candidates": [
+                {
+                    "plate": "GJJNE",
+                    "confidence": 79.056992,
+                    "matches_template": 0
+                },
+                {
+                    "plate": "GJJRE",
+                    "confidence": 73.007217,
+                    "matches_template": 0
+                },
+                {
+                    "plate": "GJJHE",
+                    "confidence": 70.58799,
+                    "matches_template": 0
+                },
+                {
+                    "plate": "GJJZE",
+                    "confidence": 69.603333,
+                    "matches_template": 0
+                },
+                {
+                    "plate": "2JJNE",
+                    "confidence": 68.579994,
+                    "matches_template": 0
+                },
+                {
+                    "plate": "2JJRE",
+                    "confidence": 62.530212,
+                    "matches_template": 0
+                },
+                {
+                    "plate": "2JJHE",
+                    "confidence": 60.110992,
+                    "matches_template": 0
+                },
+                {
+                    "plate": "2JJZE",
+                    "confidence": 59.126328,
+                    "matches_template": 0
+                }
+            ]
+        }
+    ],
+}
+```
 
 ### Supported file formats
-Presently, only .csv is a supported format. Will be expanded upon.
+Presently, only .csv is a supported format.
+
+When .csv is chosen as the expected file format, it gives information following this structure with example data shown here:
+```csv
+    start_time;end_time;frames;plate;lowest_confidence;highest_confidence;
+    00:00:00;00:00:01;1;GJJNE;79.056992;79.056992;
+    00:00:01;00:00:02;2;KI006SD;90.544319;93.555351;
+    ...
+```
 
 ## How is the program set up?
 The program primarily functions through its `Dockerfile`. The `Dockerfile` creates a seperate, small linux installation on the machine running the docker commands. This linux operative system then gets just the things installed which are necessary to make the different machine learning models and python scripts work. This makes it possible to skip all the unnecessary installation process of the different machine learning models and dependencies, as well make this program possible to run on any computer, since it basically is its own linux distribution.
