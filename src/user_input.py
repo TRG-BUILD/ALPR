@@ -1,16 +1,25 @@
 import os
+import sys
 
 def user_input():
     mi_model = get_mi_model()
     
-    code = get_code(mi_model)
+    code = ""
+    try:
+        code = sys.argv[1]
+    except IndexError as e:
+        code = get_code(mi_model)
     
     min_confidence = get_min_confidence()
     
     file_format = get_file_format()
     seperator = get_seperator()
     
-    sort_by = get_sorting()
+    sort_by = ""
+    try:
+        sort_by = sys.argv[2]
+    except IndexError as e:
+       sort_by = get_sorting()
     
     return code, mi_model, file_format, seperator, min_confidence, sort_by
 

@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  alpr:
+    build: ./
+    command: "src/controller.py eu vurdering"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./input_videos:/input_videos
+      - ./export_files:/export_files
