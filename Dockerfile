@@ -38,4 +38,4 @@ RUN python3.7 -m pip install -r requirements.txt
 # Copy everything inside the /alpr folder into the docker container
 COPY ./src ./src
 
-CMD [ "python3.7", "src/controller.py" ]
+ENTRYPOINT [ "python3.7" ]

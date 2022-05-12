@@ -3,8 +3,8 @@
 from unittest import result
 
 
-def file_formater(file_path, file_format, seperator, minimum_confidence, results_list):
-    new_list = combine_alpr_results_and_reduce_list(results_list, minimum_confidence)#reduce_list(results_list)
+def file_formater(file_path, file_format, seperator, minimum_confidence, sort_by, results_list):
+    new_list = combine_alpr_results_and_reduce_list(results_list, minimum_confidence, sort_by)#reduce_list(results_list)
     if file_format == ".csv":
         write_to_csv(file_path, seperator, new_list)
     else:
@@ -13,7 +13,7 @@ def file_formater(file_path, file_format, seperator, minimum_confidence, results
         write_to_csv(file_path, seperator, new_list)
     
 
-def combine_alpr_results_and_reduce_list(results_list, minimum_confidence):
+def combine_alpr_results_and_reduce_list(results_list, minimum_confidence, sort_by):
     # This function takes in a results list containing all frames in the video where a result is
     # It then combines all results that point towards the same number plate
     # It does this even for partial recognitions (ie. result 1 candidate 1 with plate XXYY 
@@ -39,6 +39,14 @@ def combine_alpr_results_and_reduce_list(results_list, minimum_confidence):
                 combined_results.append(new_result)
             else:
                 combined_results = _update_result(combined_results, result_match, new_result, alpr_frame["time"], minimum_confidence)
+    
+    if sort_by == "vurdering":
+        combined_results.sort(key=lambda x: x["average_confidence"], reverse=True)
+    elif sort_by == "tid":
+        pass #Already sorted this way from the algorithm
+    else:
+        print("Defaulter til at bruge tid, da " + sort_by + " ikke er et validt input")
+    
     
     return combined_results
     
