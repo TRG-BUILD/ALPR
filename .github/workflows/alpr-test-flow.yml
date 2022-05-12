@@ -1,4 +1,4 @@
-name: Web CI
+name: ALPR Test CI
 
 on:
   pull_request:
