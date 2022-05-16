@@ -58,8 +58,7 @@ Put the files you want to analyze into the alpr/input_videos/ folder. (Preferabl
 Then run the container and follow the instructions.
 - `docker-compose run alpr`
 
-The program will then analyze each video. Expect roughly double to triple the video length in time pr. video.
-(This of course depends on your own computer)
+The program will then analyze each video. The time it takes for the algorithm can take from 2 to 30 times the length of the video, depending on the quality of the video.
 
 When done, all videos have been analyzed and created as files in the alpr/export_files/ folder.
 
