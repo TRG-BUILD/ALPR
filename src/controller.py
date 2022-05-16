@@ -7,6 +7,7 @@ from video_loader import video_loader
 from recognizer import recognizer
 
 def controller():
+    raise Exception("HERE")
     videos_dir_path = os.getcwd() + "/input_videos"
     files_dir_path = os.getcwd() + "/export_files"
     video_list = video_loader(videos_dir_path)
