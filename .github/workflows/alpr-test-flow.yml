@@ -1,4 +1,4 @@
-name: ALPR Test CI
+name: ALPR CI Flows
 
 on:
   pull_request:
@@ -33,6 +33,5 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install -e .
     - name: run automated tests
       run: python -m pytest
