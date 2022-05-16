@@ -63,6 +63,34 @@ The program will then analyze each video. Expect roughly double to triple the vi
 
 When done, all videos have been analyzed and created as files in the alpr/export_files/ folder.
 
+## How is the program set up?
+The program is setup given the following diagram:
+
+```mermaid
+graph TD;
+    docker-compose-- 1. starts up a seperate linux operative system on the computer ie. the container---ALPR_container;
+    ALPR_container-- 2. runs the program below in the linux container ---controller;
+    controller-- 3. converts video to mp4 ---video_loader;
+    controller-- 4. gets user input ---user_input;
+    user_input-- 5. asks user in the command prompt ---user;
+    controller-- 6. Recognizes number plates ---recognizer;
+    controller-- 7. saves it to  file ---file_formatter;
+```
+
+The program primarily functions through its `Dockerfile`. The `Dockerfile` creates a seperate, small linux installation on the machine running the docker commands. This linux operative system then gets just the things installed which are necessary to make the different machine learning models and python scripts work. This makes it possible to skip all the unnecessary installation process of the different machine learning models and dependencies, as well make this program possible to run on any computer, since it basically is its own linux distribution.
+
+The program has a `/src` folder which contains the controller, the user_input, the recognizer, the file_formater and the video_converter.
+
+The controller calls the user_input, the video_converter, the recognizer and the file_formatter in this order.
+
+The user_input takes all relevant user_input from the user. Where to find the video, what file format is wanted, etc.
+
+The video_converter checks if the chosen video (or set of videos) is in a correct format. If not, it will create a new video file based on the given video to an understandable format.
+
+The recognizer uses the chosen ALPR/ANPR machine learning algorithm, which have been installed. The Dockerfile installs different models which can be selected by the user.
+
+The file_formater takes the list of recognized numberplates and turns it into the chosen file format, also making sure the data is presented as the user wants it.
+
 ## Supported Models and Format
 Here is a list and description of what machine learning models and formats are used.
 
@@ -164,18 +192,3 @@ When .csv is chosen as the expected file format, it gives information following 
     00:00:01;00:00:02;2;KI006SD;90.544319;93.555351;
     ...
 ```
-
-## How is the program set up?
-The program primarily functions through its `Dockerfile`. The `Dockerfile` creates a seperate, small linux installation on the machine running the docker commands. This linux operative system then gets just the things installed which are necessary to make the different machine learning models and python scripts work. This makes it possible to skip all the unnecessary installation process of the different machine learning models and dependencies, as well make this program possible to run on any computer, since it basically is its own linux distribution.
-
-The program has a `/src` folder which contains the controller, the user_input, the recognizer, the file_formater and the video_converter.
-
-The controller calls the user_input, the video_converter, the recognizer and the file_formatter in this order.
-
-The user_input takes all relevant user_input from the user. Where to find the video, what file format is wanted, etc.
-
-The video_converter checks if the chosen video (or set of videos) is in a correct format. If not, it will create a new video file based on the given video to an understandable format.
-
-The recognizer uses the chosen ALPR/ANPR machine learning algorithm, which have been installed. The Dockerfile installs different models which can be selected by the user.
-
-The file_formater takes the list of recognized numberplates and turns it into the chosen file format, also making sure the data is presented as the user wants it.
