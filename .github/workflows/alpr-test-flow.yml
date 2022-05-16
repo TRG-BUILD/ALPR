@@ -1,4 +1,4 @@
-name: ALPR Test CI
+name: ALPR CI Flows
 
 on:
   pull_request:
@@ -11,9 +11,30 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build, run, test and tear down
+    - name: Build and run a test example
       run: |
-        mv ./test_clip.mp4 /input_videos
+        cp "./test_clip.mp4" "./input_videos"
         docker-compose -f docker-compose.test.yml build
         docker-compose -f docker-compose.test.yml run alpr
         docker-compose -f docker-compose.test.yml down -v
+        rm "./export_files/test_clip.csv"
+        rm "./input_videos/test_clip.mp4"
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7.13
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7.13
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: run automated tests
+      run: |
+        cd src
+        python -m pytest

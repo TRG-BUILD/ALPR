@@ -3,7 +3,7 @@ import subprocess
 import ffmpeg
 
 def video_loader(videos_dir_path):
-    file_list = os.listdir(videos_dir_path)
+    file_list = get_list_of_files_from_dir(videos_dir_path)
     
     video_list = []
     for file_name in file_list:
@@ -18,6 +18,9 @@ def video_loader(videos_dir_path):
         })
     
     return video_list
+
+def get_list_of_files_from_dir(path):
+    return os.listdir(path)
 
 def _video_converter(path):
     mp4_path = ""
