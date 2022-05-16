@@ -17,6 +17,7 @@ jobs:
         docker-compose -f docker-compose.test.yml build
         docker-compose -f docker-compose.test.yml run alpr
         docker-compose -f docker-compose.test.yml down -v
+        rm "./export_files/test_clip.csv"
         rm "./input_videos/test_clip.mp4"
 
   test:
@@ -34,4 +35,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: run automated tests
-      run: python -m pytest
+      run: |
+        cd src
+        python -m pytest
