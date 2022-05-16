@@ -1,5 +1,8 @@
 version: "3"
 
+# This compose file only sends predefined arguments to the controller
+# This is made to skip the user input, but otherwise should work exactly as the original docker-compose
+
 services:
   alpr:
     build: ./

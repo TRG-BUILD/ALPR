@@ -13,7 +13,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build, run, test and tear down
       run: |
-        docker-compose -f docker-compose.test.yml exec mv ./test_clip.mp4 /input_videos
+        mv ./test_clip.mp4 /input_videos
         docker-compose -f docker-compose.test.yml build
         docker-compose -f docker-compose.test.yml run alpr
         docker-compose -f docker-compose.test.yml down -v
+        rm /input_videos/test_clip.mp4
