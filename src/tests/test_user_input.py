@@ -2,7 +2,7 @@
 
 from user_input import user_input
 
-def test_user_input_can_be_setup_for_unit_tests_using_mocks(mocker):
+def test_user_input_can_mock_functions_that_use_external_dependencie(mocker):
     mockGetMIModel = mocker.patch("user_input.get_mi_model", return_value="alpr")
     mockGetCode = mocker.patch("user_input.get_code", return_value="someCode")
     mockGetMinConfidence = mocker.patch("user_input.get_min_confidence", return_value=101)
@@ -10,6 +10,11 @@ def test_user_input_can_be_setup_for_unit_tests_using_mocks(mocker):
     mockGetSeperator = mocker.patch("user_input.get_seperator", return_value="someSeperator")
     mockGetSortBy = mocker.patch("user_input.get_sorting", return_value="somethingToSortBy")
     
-    user_input()
+    resultCode, resultMI,resultFormat,resultSep,resultConf,resultSort = user_input()
     
-    assert True
+    assert resultMI == "alpr"
+    assert resultCode == "someCode"
+    assert resultConf == 101
+    assert resultFormat == "someFormat"
+    assert resultSep == "someSeperator"
+    assert resultSort == "somethingToSortBy"

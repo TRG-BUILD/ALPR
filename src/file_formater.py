@@ -11,6 +11,8 @@ def file_formater(file_path, file_format, seperator, minimum_confidence, sort_by
         print("\nFilformatet: " + str(file_format) + " er ikke supporteret af file_formatter funktionen\n")
         print("Der bruges standarden som er at generere en .csv fil istedet\n")
         write_to_csv(file_path, seperator, new_list)
+        
+    return True
     
 
 def combine_alpr_results_and_reduce_list(results_list, minimum_confidence, sort_by):

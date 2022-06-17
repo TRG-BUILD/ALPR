@@ -6,7 +6,7 @@ def user_input():
     
     code = ""
     try:
-        code = sys.argv[1]
+        code = sys.argv[3]
     except IndexError as e:
         code = get_code(mi_model)
     
@@ -17,7 +17,7 @@ def user_input():
     
     sort_by = ""
     try:
-        sort_by = sys.argv[2]
+        sort_by = sys.argv[4]
     except IndexError as e:
        sort_by = get_sorting()
     

@@ -8,6 +8,6 @@ def test_file_formater_can_mock_functions_that_use_external_dependencies(mocker)
     sort_by = "tid"
     minimum_confidence = 99
     
-    file_formater("/some/file/path", ".some_format", "some;seperator", minimum_confidence, sort_by, results_list)
+    result = file_formater("/some/file/path", ".some_format", "some;seperator", minimum_confidence, sort_by, results_list)
     
-    assert True
+    assert result == True

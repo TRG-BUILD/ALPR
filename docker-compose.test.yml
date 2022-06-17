@@ -2,11 +2,13 @@ version: "3"
 
 # This compose file only sends predefined arguments to the controller
 # This is made to skip the user input, but otherwise should work exactly as the original docker-compose
+# filler1 and filler2 is necessary for the pytest to make a coverage rapport without errors
+# if possible, this docker-compose.test.yml should be refactored to avoidd these
 
 services:
   alpr:
     build: ./
-    command: "src/controller.py eu vurdering"
+    command: "src/controller.py filler1 filler2 eu vurdering"
     stdin_open: true
     tty: true
     volumes:

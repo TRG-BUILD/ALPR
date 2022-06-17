@@ -30,10 +30,11 @@ def controller():
         print("\nPåbegynder plade genkendelses algoritmen på filen " + video["name"] + "\n")
         result_list = recognizer(code, mi_model, video["path"], video["time"])        
         print("\nAlgoritmen er færdig, gemmer som fil\n")
-        file_path = files_dir_path + "/" + video["name"].replace(".mp4",file_format).replace(".MP4", file_format)
+        video_name = video["name"].replace(".mp4",file_format).replace(".MP4", file_format)
+        file_path = files_dir_path + "/" + video_name
         file_formater(file_path, file_format, seperator, minimum_confidence, sort_by, result_list)
         end_time = time()
-        print("\nFil gemt som " + str(video["name"]).replace(".mp4", file_format) +" i /alpr/export_files/ folderen.\n")
+        print("\nFil gemt som " + video_name +" i /alpr/export_files/ folderen.\n")
         print("\nDet tog " + str(round(end_time-start_time, 2)) + " sekunder.\n")
     print("\nAlle videoer er blevet analyseret. Se i README.md filen under 'Analysis' sektionen, hvad de forskellige kolonnner i filerne betyder.")
     return True
