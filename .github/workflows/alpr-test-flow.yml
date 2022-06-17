@@ -37,4 +37,4 @@ jobs:
     - name: run automated tests
       run: |
         cd src
-        python -m pytest
+        python -m pytest --cov --cov-fail-under=52
